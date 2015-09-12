@@ -145,7 +145,7 @@ public class Category implements KvmSerializable
     }
 
 
-    public static class Stock {
+    public static class Stock{
 
         protected BigInteger sku;
         protected BigInteger stockAnt;

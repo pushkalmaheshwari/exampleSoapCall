@@ -65,7 +65,6 @@ public class SoapRequests {
             ht.call(SOAP_ACTION + methodname, envelope);
             testHttpResponse(ht);
             SoapObject response = (SoapObject)envelope.getResponse();
-
             Category category = RetrieveFromSoap(response);
             String resultsString = getDisplayString(category);
 
@@ -127,16 +126,14 @@ public class SoapRequests {
     public static Category RetrieveFromSoap(SoapObject  pii)
     {
 
-            int categoryId = Integer.parseInt(pii.getProperty("CategoryId").toString());
-                    //Integer.parseInt(pii.getProperty(0).toString());
-            String name = pii.getProperty("Name").toString();
-            String description = pii.getProperty("Description").toString();
-            List <Category.Stock> stList = new ArrayList<Category.Stock>();
+            Category category = new Category();
 
-            String stockList  =  pii.getPropertyAsString("Stocks");
+            category.CategoryId  = Integer.parseInt(pii.getProperty("CategoryId").toString());
 
+            SoapObject stockSoapObject = (SoapObject) pii.getProperty("Stocks");
+            String myvalue = stockSoapObject.getProperty("sku").toString();
+            String myvalue2 = stockSoapObject.getProperty("color").toString();
 
-            Category category = new Category(categoryId, name,description,stList);
 
         return category;
     }
